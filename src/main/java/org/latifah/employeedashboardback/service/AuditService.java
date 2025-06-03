@@ -1,7 +1,7 @@
 package org.latifah.employeedashboardback.service;
 
-import org.latifah.employeedashboardback.entity.AuditLog;
-import org.latifah.employeedashboardback.entity.User;
+import org.latifah.employeedashboardback.model.AuditLog;
+import org.latifah.employeedashboardback.model.User;
 import org.latifah.employeedashboardback.repository.AuditLogRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

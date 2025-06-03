@@ -1,6 +1,7 @@
-package org.latifah.employeedashboardback.entity;
+package org.latifah.employeedashboardback.model;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity

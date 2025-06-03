@@ -1,6 +1,6 @@
 package org.latifah.employeedashboardback.dto;
 
-import org.latifah.employeedashboardback.entity.User;
+import org.latifah.employeedashboardback.model.User;
 
 public class ClientBasicDTO {
     private Long clientId;

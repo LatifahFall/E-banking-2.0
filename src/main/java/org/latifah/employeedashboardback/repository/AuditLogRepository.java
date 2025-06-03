@@ -1,6 +1,6 @@
 package org.latifah.employeedashboardback.repository;
 
-import org.latifah.employeedashboardback.entity.AuditLog;
+import org.latifah.employeedashboardback.model.AuditLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

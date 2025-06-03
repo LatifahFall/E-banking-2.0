@@ -1,7 +1,7 @@
 package org.latifah.employeedashboardback.service;
 
 import org.latifah.employeedashboardback.model.Role;
-import org.latifah.employeedashboardback.entity.User;
+import org.latifah.employeedashboardback.model.User;
 import org.latifah.employeedashboardback.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,11 @@ public class UserService {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé"));
     }
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé"));
+    }
+
     public Role getUserRoleByEmail(String email) {
         return userRepository.getUserRoleByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Rôle non trouvé"))
@@ -30,4 +35,20 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         return user.getId();
     }
+    public Long getUserIdByUsername(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        return user.getId();
+    }
+    public Role getUserRoleByUsername(String username) {
+        return userRepository.getUserRoleByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Rôle non trouvé"))
+                .getRole();
+    }
+    public String getUserPhoneByUsername(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        return user.getTel();
+    }
+
 }

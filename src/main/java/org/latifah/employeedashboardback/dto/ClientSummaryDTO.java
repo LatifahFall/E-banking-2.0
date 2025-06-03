@@ -1,6 +1,6 @@
 package org.latifah.employeedashboardback.dto;
 
-import org.latifah.employeedashboardback.entity.User;
+import org.latifah.employeedashboardback.model.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,13 +35,15 @@ public class ClientSummaryDTO {
                     accDto.setType(account.getType());
                     accDto.setBalance(account.getBalance());
 
-                    accDto.setTransactions(
-                            account.getTransactions().stream().map(tx -> {
-                                TransactionDTO txDto = new TransactionDTO();
-                                txDto.setTransactionId(tx.getId()); // id est un String
-                                txDto.setAmount(tx.getAmount());
-                                txDto.setDate(tx.getDate()); // date est LocalDateTime
-                                return txDto;
+                    accDto.setAccountOperations(
+                            account.getAccountOperations().stream().map(op -> {
+                                AccountOperationDTO opDto = new AccountOperationDTO();
+                                opDto.setId(op.getId());
+                                opDto.setAmount(op.getAmount());
+                                opDto.setOperationDate(op.getOperationDate());
+                                opDto.setType(op.getType());
+                                opDto.setDescription(op.getDescription());
+                                return opDto;
                             }).collect(Collectors.toList())
                     );
 
@@ -51,6 +53,7 @@ public class ClientSummaryDTO {
 
         return dto;
     }
+
 
 
     public Long getClientId() {

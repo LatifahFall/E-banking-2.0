@@ -1,6 +1,6 @@
 package org.latifah.employeedashboardback.repository;
 
-import org.latifah.employeedashboardback.entity.SuspendedService;
+import org.latifah.employeedashboardback.model.SuspendedService;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

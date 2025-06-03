@@ -1,8 +1,8 @@
 package org.latifah.employeedashboardback.controller;
 
 import org.latifah.employeedashboardback.dto.*;
-import org.latifah.employeedashboardback.entity.SuspendedService;
-import org.latifah.employeedashboardback.entity.User;
+import org.latifah.employeedashboardback.model.SuspendedService;
+import org.latifah.employeedashboardback.model.User;
 import org.latifah.employeedashboardback.model.BankService;
 import org.latifah.employeedashboardback.repository.SuspendedServiceRepository;
 import org.latifah.employeedashboardback.repository.UserRepository;

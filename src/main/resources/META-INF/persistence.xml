@@ -1,10 +1,10 @@
 <persistence xmlns="https://jakarta.ee/xml/ns/persistence"
              version="3.0">
     <persistence-unit name="ebankingPU">
-        <class>org.latifah.employeedashboardback.entity.User</class>
-        <class>org.latifah.employeedashboardback.entity.BankAccount</class>
-        <class>org.latifah.employeedashboardback.entity.Transaction</class>
-        <class>org.latifah.employeedashboardback.entity.Archive</class>
+        <class>org.latifah.employeedashboardback.model.User</class>
+        <class>org.latifah.employeedashboardback.model.BankAccount</class>
+        <class>org.latifah.employeedashboardback.model.AccountOperation</class>
+        <class>org.latifah.employeedashboardback.model.Archive</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>

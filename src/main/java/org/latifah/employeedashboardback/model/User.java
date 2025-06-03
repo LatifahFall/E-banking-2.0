@@ -1,11 +1,11 @@
-package org.latifah.employeedashboardback.entity;
+package org.latifah.employeedashboardback.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import jakarta.persistence.*;
-import org.latifah.employeedashboardback.model.Role;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class User {
     @Column(name = "cin", unique = true, nullable = false)
     private String cin;
 
-    @Column(unique = true)
+    @Column(name= "username", unique = true, nullable = false)
     private String username;
 
     @Column(name = "first_name")
@@ -50,11 +50,18 @@ public class User {
     @Column(name = "documents_complets")
     private Boolean documentsComplets;
 
+    @Column(name = "token")
+    private String token;
+
+    @Column(name = "must_change_password")
+    private Boolean mustChangePassword;
+
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> servicesActifs = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<BankAccount> accounts;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<BankAccount> bankAccounts;
 
     public boolean isCompteBloque() { return compteBloque; }
     public boolean isDocumentsComplets() { return documentsComplets; }
@@ -132,8 +139,8 @@ public class User {
     public List<String> getServicesActifs() { return servicesActifs; }
     public void setServicesActifs(List<String> servicesActifs) { this.servicesActifs = servicesActifs; }
 
-    public List<BankAccount> getAccounts() { return accounts; }
-    public void setAccounts(List<BankAccount> accounts) { this.accounts = accounts; }
+    public List<BankAccount> getAccounts() { return bankAccounts; }
+    public void setAccounts(List<BankAccount> bankAccounts) { this.bankAccounts = bankAccounts; }
 
     public Boolean getCompteBloque() { return compteBloque; }
     public void setCompteBloque(boolean compteBloque) {
@@ -144,6 +151,15 @@ public class User {
     public void setDocumentsComplets(boolean documentsComplets) {
         this.documentsComplets = documentsComplets;
     }
+
+    public Boolean getMustChangePassword() {
+        return mustChangePassword;
+    }
+    public void setMustChangePassword(boolean mustChangePassword) {
+        this.mustChangePassword = mustChangePassword;
+    }
+    public String getToken() { return token; }
+    public void setToken(String token) { this.token = token; }
 
     public List<SuspendedService> getSuspendedServices() {
         return suspendedServices;

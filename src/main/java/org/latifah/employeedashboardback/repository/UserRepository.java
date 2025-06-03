@@ -1,6 +1,6 @@
 package org.latifah.employeedashboardback.repository;
 
-import org.latifah.employeedashboardback.entity.User;
+import org.latifah.employeedashboardback.model.User;
 import org.latifah.employeedashboardback.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findById(Long id);
     Optional<User> findByEmail(String email);
     Optional<User> getUserRoleByEmail(String email);
     List<User> findByLastNameContains(String keyword);
@@ -47,5 +48,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 """)
     List<User> findUsersWithAccountsByRoleAndNameContaining(@Param("role") Role role, @Param("name") String name);
 
-
+    Optional<User> getUserRoleByUsername (String username);
 }

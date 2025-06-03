@@ -1,10 +1,14 @@
-package org.latifah.employeedashboardback.entity;
+package org.latifah.employeedashboardback.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TYPE" , length = 10)
 @Table(name = "accounts")
 public class BankAccount {
     @Id
@@ -16,6 +20,8 @@ public class BankAccount {
             this.id = java.util.UUID.randomUUID().toString();
         }
     }
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date createAt;
 
     // Encrypted, stored in DB
     @Column(name = "accountnumber")
@@ -33,8 +39,8 @@ public class BankAccount {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
-    private List<Transaction> transactions;
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+    private List<AccountOperation> accountOperations;
 
     // getters and setters
     public String getId() {
@@ -42,6 +48,13 @@ public class BankAccount {
     }
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
     public String getAccountNumber() {
         return accountNumber;
@@ -67,8 +80,8 @@ public class BankAccount {
     public void setUser(User user) {
         this.user = user;
     }
-    public List<Transaction> getTransactions() { return transactions; }
-    public void setTransactions(List<Transaction> transactions) { this.transactions = transactions; }
+    public List<AccountOperation> getAccountOperations() { return accountOperations; }
+    public void setAccountOperations(List<AccountOperation> transactions) { this.accountOperations = accountOperations; }
     public String getRawAccountNumber() {
         return rawAccountNumber;
     }

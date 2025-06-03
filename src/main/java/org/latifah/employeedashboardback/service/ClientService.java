@@ -1,8 +1,8 @@
 package org.latifah.employeedashboardback.service;
 
 import org.latifah.employeedashboardback.dto.*;
-import org.latifah.employeedashboardback.entity.*;
 import org.latifah.employeedashboardback.model.Role;
+import org.latifah.employeedashboardback.model.User;
 import org.latifah.employeedashboardback.repository.AccountRepository;
 import org.latifah.employeedashboardback.repository.UserRepository;
 import org.springframework.stereotype.Service;

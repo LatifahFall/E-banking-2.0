@@ -1,8 +1,10 @@
 package org.latifah.employeedashboardback.service;
 
 import org.latifah.employeedashboardback.dto.*;
-import org.latifah.employeedashboardback.entity.*;
+import org.latifah.employeedashboardback.model.AccountOperation;
+import org.latifah.employeedashboardback.model.BankAccount;
 import org.latifah.employeedashboardback.model.Role;
+import org.latifah.employeedashboardback.model.User;
 import org.latifah.employeedashboardback.repository.*;
 
 import org.latifah.employeedashboardback.security.EncryptionUtil;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -18,15 +21,19 @@ public class EnrollmentService {
 
     private final UserRepository userRepository;
     private final AccountRepository accountRepository;
-    private final TransactionRepository transactionRepository;
+//    private final TransactionRepository transactionRepository;
+    private final AccountOperationRepository accountOperationRepository;
 
-    public EnrollmentService(UserRepository userRepository,
-                             AccountRepository accountRepository,
-                             TransactionRepository transactionRepository) {
+    public EnrollmentService(
+            UserRepository userRepository,
+            AccountRepository accountRepository,
+            AccountOperationRepository accountOperationRepository // ajouté ici
+    ) {
         this.userRepository = userRepository;
         this.accountRepository = accountRepository;
-        this.transactionRepository = transactionRepository;
+        this.accountOperationRepository = accountOperationRepository;
     }
+
 
     public long countClients() {
         return userRepository.countClients();
@@ -167,16 +174,32 @@ public class EnrollmentService {
 
 
 
+//    @Transactional
+//    public boolean deleteClient(Long clientId) {
+//        Optional<User> opt = userRepository.findById(clientId);
+//        if (opt.isEmpty()) return false;
+//
+//        if (!transactionRepository.findByUserId(clientId).isEmpty()) return false;
+//
+//        User client = opt.get();
+//        accountRepository.deleteByUserId(clientId); // méthode custom ou native query
+//        userRepository.delete(client);
+//        return true;
+//    }
+
     @Transactional
     public boolean deleteClient(Long clientId) {
         Optional<User> opt = userRepository.findById(clientId);
         if (opt.isEmpty()) return false;
 
-        if (!transactionRepository.findByUserId(clientId).isEmpty()) return false;
+        // Vérifie s'il y a des opérations liées à cet utilisateur
+        List<AccountOperation> ops = accountOperationRepository.findByBankAccount_User_Id(clientId);
+        if (!ops.isEmpty()) return false;
 
-        User client = opt.get();
-        accountRepository.deleteByUserId(clientId); // méthode custom ou native query
-        userRepository.delete(client);
+        // Suppression des comptes avant utilisateur
+        accountRepository.deleteByUserId(clientId);
+        userRepository.delete(opt.get());
         return true;
     }
+
 }
