@@ -14,5 +14,6 @@ public enum BankService {
     FACTURES,
     MULTIDEVISES,
     SERVICE_CLIENT,
+    ASSISTANT,
     MESSAGERIE_SECURISÉE
 }

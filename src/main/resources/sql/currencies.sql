@@ -1,4 +1,5 @@
 INSERT INTO currencies (code_iso, exchange_rate, name,isDefault) VALUES
+
                                                            ('MAD', 1.0, 'Moroccan Dirham',True),
                                                            ('USD', 10.2, 'US Dollar',False),
                                                            ('EUR', 11.0, 'Euro',False),

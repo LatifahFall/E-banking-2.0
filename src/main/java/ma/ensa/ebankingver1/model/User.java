@@ -60,6 +60,7 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<BankAccount> accounts;
 
+
     public boolean isCompteBloque() { return compteBloque; }
     public boolean isDocumentsComplets() { return documentsComplets; }
 
