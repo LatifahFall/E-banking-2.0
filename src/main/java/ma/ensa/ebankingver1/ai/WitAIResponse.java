@@ -48,7 +48,7 @@ public class WitAIResponse {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private static class Entity {
+    public static class Entity {
         @JsonProperty("value")
         Object value;
 
